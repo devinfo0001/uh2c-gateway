@@ -1,0 +1,19 @@
+info:
+  app:
+    version: G2R16C0
+
+ # Application name discovery
+spring:
+  application:
+    name: uh2c-gateway-service
+    
+# profil DEV
+---
+spring:
+  profiles: dev
+  
+# URI config cloud
+  cloud:
+    config:
+      uri: http://localhost:8888
+      

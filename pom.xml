@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
+                             https://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+	<modelVersion>4.0.0</modelVersion>
+    <groupId>com.mycompany.myapp</groupId>
+
+	<artifactId>uh2c-gateway</artifactId>
+	<version>1.0.0.0-SNAPSHOT</version>
+	<packaging>jar</packaging>
+	<name>uh2c-gateway</name>
+	<description>uh2c gateway [uh2c-GATEWAY]</description>
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+		<maven.compiler.source>11</maven.compiler.source>
+		<maven.compiler.target>11</maven.compiler.target>
+
+		<!-- starter class -->
+		<start-class>ma.uh2c.Uh2cGatewayApplication</start-class>
+
+		<!-- Maven config -->
+		<maven.build.timestamp.format>yyyy-MM-dd HH:mm</maven.build.timestamp.format>
+		<maven-jar-plugin.version>3.8.1</maven-jar-plugin.version>
+
+		<!-- java version -->
+		<java.version>11</java.version>
+
+		<!-- config boot & cloud -->
+		<spring-boot.version>2.1.9.RELEASE</spring-boot.version>
+		<spring-cloud.version>Greenwich.RELEASE</spring-cloud.version>
+
+		<!-- json token security -->
+		<jjwt.version>0.9.1</jjwt.version>
+
+		<!-- swagger -->
+		<swagger.version>2.9.2</swagger.version>
+
+		<!-- toggles -->
+		<togglz.version>2.5.0.Final</togglz.version>
+
+		<!-- apache (commons,...) -->
+		<apache.commons.version>3.9</apache.commons.version>
+					
+	</properties>
+
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-starter-parent</artifactId>
+				<version>${spring-boot.version}</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+
+			<dependency>
+				<groupId>org.springframework.cloud</groupId>
+				<artifactId>spring-cloud-dependencies</artifactId>
+				<version>${spring-cloud.version}</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
+
+	<dependencies>
+		<!-- Spring cloud config client -->
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-config</artifactId>
+		</dependency>
+		
+		<!-- Spring cloud eureka client -->
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
+		</dependency>
+
+		<!-- Spring cloud zuul -->
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-netflix-zuul</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
+
+		<!-- live reload -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-devtools</artifactId>
+			<optional>true</optional>
+		</dependency>
+
+		<!-- socle -->
+
+		<!-- Security -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-security</artifactId>
+		</dependency>
+
+		<!-- swagger -->
+		<dependency>
+			<groupId>io.springfox</groupId>
+			<artifactId>springfox-swagger2</artifactId>
+			<version>${swagger.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>io.springfox</groupId>
+			<artifactId>springfox-swagger-ui</artifactId>
+			<version>${swagger.version}</version>
+			<scope>compile</scope>
+		</dependency>
+
+		<!-- json web token -->
+		<dependency>
+			<groupId>io.jsonwebtoken</groupId>
+			<artifactId>jjwt</artifactId>
+			<version>${jjwt.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.togglz</groupId>
+			<artifactId>togglz-spring-boot-starter</artifactId>
+			<version>${togglz.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.togglz</groupId>
+			<artifactId>togglz-spring-security</artifactId>
+			<version>${togglz.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-lang3</artifactId>
+		</dependency>
+				<!-- migration JAVA 11 -->
+		<dependency>
+			<groupId>javax.xml.bind</groupId>
+			<artifactId>jaxb-api</artifactId>
+	
+		</dependency>
+	
+		<dependency>
+			<groupId>com.sun.xml.bind</groupId>
+			<artifactId>jaxb-core</artifactId>
+			<version>2.3.0</version>
+		</dependency>
+	
+		<dependency>
+			<groupId>com.sun.xml.bind</groupId>
+			<artifactId>jaxb-impl</artifactId>
+			<version>2.3.0</version>
+		</dependency>
+	</dependencies>
+
+	<build>
+		<finalName>${project.name}-${project.version}</finalName>
+		<plugins>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+				 <version>2.6.4</version>
+				<configuration>
+					<fork>true</fork>
+					<mainClass>ma.uh2c.er.uh2cGatewayApplication</mainClass>
+				</configuration>
+				<executions>
+					<execution>
+						<goals>
+							<goal>repackage</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<!-- 		dependency-check-reports-with-sonarqube -->
+				<plugin>
+				   <groupId>org.owasp</groupId>
+				   <artifactId>dependency-check-maven</artifactId>
+				   <version>7.1.0</version>
+				   
+                <configuration>
+				      <formats>
+				         <format>html</format>
+				         <format>json</format>
+				      </formats>
+				   </configuration>
+				</plugin>
+		</plugins>
+	</build>
+
+	<!-- Profiles uh2c -->
+	<profiles>
+		<!-- local profile -->
+		<profile>
+			<id>local</id>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
+			<properties>
+				<spring.active.profile>dev</spring.active.profile>
+			</properties>
+		</profile>
+
+	
+	</profiles>
+</project>
