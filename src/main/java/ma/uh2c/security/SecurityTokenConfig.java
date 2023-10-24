@@ -16,21 +16,21 @@ public class SecurityTokenConfig extends WebSecurityConfigurerAdapter {
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-//		http.csrf().disable()
-//				// Nous n'avons pas besoin de la session pour persister l'etat
-//				// de l'utilisateur
-//				.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
-//				// On gère les tentatives d'accès non autorisées
-//				.exceptionHandling()
-//				.authenticationEntryPoint((req, rsp, e) -> rsp.sendError(HttpServletResponse.SC_UNAUTHORIZED)).and()
-//				// On vérifie le token à chaque requête
+		http.csrf().disable()
+				// Nous n'avons pas besoin de la session pour persister l'etat
+				// de l'utilisateur
+				.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
+				// On gère les tentatives d'accès non autorisées
+				.exceptionHandling()
+				.authenticationEntryPoint((req, rsp, e) -> rsp.sendError(HttpServletResponse.SC_UNAUTHORIZED)).and()
+				// On vérifie le token à chaque requête
 //				.addFilterAfter(new JwtTokenAuthenticationFilter(jwtConfig()),
 //						UsernamePasswordAuthenticationFilter.class)
-//				// On autorise la config des requêtes via authentification AD
-//				// vRA
-//				.authorizeRequests()
-//				.antMatchers("/**/")
-//				.permitAll().anyRequest().authenticated();
+				// On autorise la config des requêtes via authentification AD
+				// vRA
+				.authorizeRequests()
+				.antMatchers("/**/compte-api/**")
+				.permitAll().anyRequest().authenticated();
 	}
 
 //	@Bean
